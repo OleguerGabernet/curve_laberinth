@@ -1,28 +1,16 @@
-var c = {
-	x1: 0,
-	y1: 0,	
-	px1:0,
-	py1:0,
-	px2:0,
-	py2:0,
-	x2: 0,
-	y2: 0,
-};
+
+var div = 10;
+var w_dim;
+var h_dim;
 
 function setup() {
-	createCanvas(400, 400);
+	createCanvas(800, 800);
+	background(245);
 
-	c.x1 = width/2;
-	c.y1 = 0;
-
-	c.px1 = width/2;
-	c.py1 = height/4;
-
-	c.px2 = 3 * width/4;
-	c.py2 = height/2;
-
-	c.x2 = width;
-	c.y2 = height/2;
+	w_dim = width/div;
+	h_dim = height/div;
+	var x = 0;
+	var y = 0;
 }
 
 function draw() {
@@ -31,17 +19,35 @@ function draw() {
 	strokeWeight(2);
 	noFill();
 
+	for (let i = 0; i < div; i++) {
+		for (let j = 0; j < div; j++) {
+			x = j * w_dim;
+			y = i * h_dim;
+			var r = int(random(2));
 
+			tile(x,y, w_dim, h_dim, r);
+
+		}
+	}
+
+
+	//tile(0,0, width/2, height/2, false);
 	
-	arc(width, 0, width, height, HALF_PI, PI)
 
-	arc(0, height, width, height, PI+HALF_PI, TWO_PI);
-
-
+	noLoop();
 }
 
 function tile(x, y, w, h, orientation){
+	translate(x,y);
 
+	if (orientation == true){
+		arc(w, 0, w, h, HALF_PI, PI)
+		arc(0, h, w, h, PI+HALF_PI, TWO_PI);
+	}
+	else {
+		arc(0, 0, w, h, 0, HALF_PI)
+		arc(w, h, w, h, PI, PI+HALF_PI);
+	}
 
-
+	translate(-x,-y);
 }
